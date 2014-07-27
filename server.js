@@ -6,7 +6,7 @@ var root = __dirname,
 
 var express_mongoose = require("express-mongoose");
 var user = require("./routers/user");
-var post = require("./routers/post");
+var posts = require("./routers/post");
 mongoose.connect('mongodb://localhost/paper');
 
 
@@ -106,7 +106,11 @@ app.get("/user/profile",function(req,res){
 });
 
 app.get("/posts",function(req,res){
-	
+	posts.find(function(err,doc){
+		if(!err){
+			res.send(doc)
+		}		
+	});
 });
 
 app.get("/post/:id",function(req,res){
@@ -114,5 +118,15 @@ app.get("/post/:id",function(req,res){
 });
 
 app.post("/posts",function(req,res){
+	var id = req.session.user._id,
+		text = req.body.text,
+		name = req.session.user.username;
 	
+	posts.insert({
+		"author":id,
+		"text":text,
+		"name":name
+	},function(err,doc){
+		res.send(doc)
+	});
 });

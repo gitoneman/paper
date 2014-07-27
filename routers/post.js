@@ -3,8 +3,9 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var _Post = new Schema({
-	username:String,
-	password:String
+	author:String,
+	text:String,
+	name:String
 });
 var PostModel = mongoose.model("post",_Post);
 

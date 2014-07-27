@@ -14,8 +14,9 @@ require(['underscore','backbone'],function(_,Backbone){
 			"playground":"playControl"
 		},
 		meControl:function(){
-			require(["me"],function(){
-				
+			require(["me"],function(me){
+				view.me = me.o;
+				// view.me.$el.hide();
 			})
 		},
 		playControl:function(){

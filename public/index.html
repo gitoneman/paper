@@ -29,32 +29,34 @@
 	      	</div>
 		</div>
 	</nav>
-	<div class="container">
+	<div class="container J_container_me">
 		<div class="row">
-			<div class="col-md-8">
-				<div class="panel panel-default">
-				  	<div class="panel-body">
-				  		<div>
-				  			这是什么这是什么
-				  		</div>
-				  		<p class="text-right f-mt10">
-				  			----<span>来自</span>
-			  				date
-				  		</p>
-
-				  	</div>
-			  	</div>	
+			<div class="col-md-8 J_me_posts">
 			</div>
 			<div class="col-md-4">
 				<div class="panel panel-default">
 				  	<div class="panel-body">
-				  		<textarea class="form-control" rows="3"></textarea>
-				  		<button type="button" class="btn btn-primary btn-block f-mt10">save</button>
+				  		<form class="J_post_add" role="form" action="/posts" method="post">
+					  		<textarea class="form-control" rows="3" name="text" placeholder="enter you paper"></textarea>
+					  		<button type="submit" class="btn btn-primary btn-block f-mt10">save</button>
+				  		</form>
 				  	</div>
 			  	</div>
 			</div>
 		</div>
 	</div>
+	<script id="post" type="text/template">	    
+	    <div class="panel panel-default">
+		  	<div class="panel-body">
+		  		<div>
+		  			<%= text %>
+		  		</div>
+		  		<p class="text-right f-mt10">
+		  			----<span><%= name %></span>	  				
+		  		</p>
+		  	</div>
+	  	</div>
+	</script>
 
 	<script type="text/javascript" src="../js/lib/jquery.min.js"></script>
 	<script type="text/javascript" src="../js/lib/bootstrap.min.js"></script>

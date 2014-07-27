@@ -1,14 +1,14 @@
 define("postModel",function(){
 	var postModel = Backbone.Model.extend({
 		defaults:{
-			"id":"",
-			"name":"admin",
+			"text":"this a test",
 		},
 		urlRoot:"/posts"
 	});
 
 	var postCollection = Backbone.Collection.extend({
-	  	model: postModel
+	  	model: postModel,
+	  	url:"/posts"
 	});
 
 	return postCollection;

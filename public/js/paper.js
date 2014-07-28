@@ -6,7 +6,7 @@ require.config({
 　　　　　　}
 });
 
-require(['underscore','backbone'],function(_,Backbone){
+require(['underscore','backbone','model/user'],function(_,Backbone,userModel){
 
 	var appRoute = Backbone.Router.extend({
 		routes:{
@@ -36,11 +36,10 @@ require(['underscore','backbone'],function(_,Backbone){
 			// this.meView = ;
 			// this.playView = ;
 
-			require(["userModel"],function(userModel){
-				w.userModel = new userModel();
-				w.userModel.fetch();
-				w.listenTo(w.userModel,"change",w.render);
-			})
+			w.userModel = new userModel();
+			w.userModel.fetch();
+			w.listenTo(w.userModel,"change",w.render);
+			
 			route.navigate("me",{trigger: true})
 	  	},
 	  	render:function(d){

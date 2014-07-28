@@ -130,3 +130,12 @@ app.post("/posts",function(req,res){
 		res.send(doc)
 	});
 });
+
+app.delete("/posts/:id",function(req,res){
+	
+	posts.delete({
+		"_id":req.params.id
+	},function(err,doc){
+		res.send("delete success")
+	})
+});

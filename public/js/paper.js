@@ -6,7 +6,7 @@ require.config({
 　　　　　　}
 });
 
-require(['underscore','backbone','model/user','me'],function(_,Backbone,userModel,meView){
+require(['underscore','backbone','model/user','me','playground'],function(_,Backbone,userModel,meView,playView){
 
 	var appRoute = Backbone.Router.extend({
 		routes:{
@@ -14,12 +14,16 @@ require(['underscore','backbone','model/user','me'],function(_,Backbone,userMode
 			"playground":"playControl"
 		},
 		meControl:function(){
+			this.playView && this.playView.remove();
 			this.meView = new meView({
 				wrap:$("#view")
 			})
 		},
 		playControl:function(){
-			this.meView.remove();
+			this.meView && this.meView.remove();
+			this.playView = new playView({
+				wrap:$("#view")
+			})
 		}
 	});
 

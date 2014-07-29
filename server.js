@@ -47,3 +47,6 @@ app.get("/posts",router.posts);
 app.get("/post/:id",router.getPost);
 app.post("/posts",router.addPost);
 app.delete("/posts/:id",router.deletePost);
+
+app.get("/topics",router.topics);
+app.post("/topics",router.addTopic);

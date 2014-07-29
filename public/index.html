@@ -2,8 +2,9 @@
 <head>
 	<meta charset="utf8">
 	<title>Paper</title>
-	<link rel="stylesheet" type="text/css" href="../css/function.css">
 	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/function.css">
+	<link rel="stylesheet" type="text/css" href="../css/index.css">
 	
 </head>
 <body>
@@ -32,6 +33,19 @@
 	<div id="view">
 
 	</div>
+
+	<script id="playground" type="text/template">
+		<div class="container">
+			<div class="J_play_topics">
+			</div>
+			<div class="m-panel">
+				<span class="glyphicon glyphicon-plus-sign f-cp J_topic_show"></span>
+				<form class="J_topic_add f-hd">
+				<input class="form-control" rows="3" name="text" placeholder="enter you paper"></input>
+		  		<button type="submit" class="btn btn-primary btn-block f-mt10">save</button></form>
+			</div>
+		</div>
+	</script>
 	<script id="meView" type="text/template">
 		<div class="container J_container_me">
 			<div class="row">
@@ -63,6 +77,11 @@
 		  		</p>
 		  	</div>
 	  	</div>
+	</script>
+	<script id="topic" type="text/template">	    
+	  	<div class="m-panel">
+			<%= text %>
+		</div>	  	
 	</script>
 
 	<script type="text/javascript" src="../js/lib/jquery.min.js"></script>

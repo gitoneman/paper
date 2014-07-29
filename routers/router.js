@@ -1,5 +1,6 @@
 var user = require("./user");
 var posts = require("./post");
+var topic = require("./topic");
 
 module.exports = {
 	index:function(req,res){
@@ -93,5 +94,25 @@ module.exports = {
 	},
 	getPost:function(req,res){
 		
+	},
+	topics:function(req,res){
+		topic.find(function(err,doc){
+			if(!err){
+				res.send(doc)
+			}		
+		});
+	},
+	addTopic:function(req,res){
+		var	text = req.body.text,
+			author = req.session.user.username;
+
+		topic.insert({
+			"author":author,
+			"text":text,
+		},function(err,doc){
+			if(!err){
+				res.send(doc)
+			}			
+		});
 	}
 }

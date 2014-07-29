@@ -5,8 +5,7 @@ var root = __dirname,
 	MongoStore = require('connect-mongo')(express);
 
 var express_mongoose = require("express-mongoose");
-var user = require("./routers/user");
-var posts = require("./routers/post");
+var router= require("./routers/router");
 mongoose.connect('mongodb://localhost/paper');
 
 
@@ -33,109 +32,18 @@ app.listen( port,function(){
 	console.log("The servr is running");
 });
 
-app.get("/",function(req,res){
-	if(!req.session.user){
-		res.redirect("/login");
-	}else{
-		res.redirect("/index.html")
-	}
-});
-app.get("/login",function(req,res){
-	if(!req.session.user){
-		res.redirect("/partial/login.html")
-	}else{
-		res.redirect("/index.html")
-	}		
-});
-
-app.get("/register",function(req,res){
-	
-	res.redirect("/partial/register.html")
-});
-
+app.get("/",router.index);
+app.get("/login",router.login);
+app.get("/register",router.register);
+app.get("/logout",router.logout);
 //user register
-app.post("/register",function(req,res){
-	
-	user.createUser({
-		"username":req.body.username,
-		"password":req.body.password
-	},function(type,err,doce){	
-		if(type == "1"){
-			// user exist
-			res.send("user already exist");
-		}else{
-			res.redirect("/partial/login.html");
-		}		
-	});
-})
-	
+app.post("/register",router.signup);
 //user login
-app.post("/login",function(req,res){
-	var info = {
-		"username":req.body.username,
-		"password":req.body.password
-	}
-	user.find(info,function(err,doc){
-		if(!err){
-			if(doc.length == 0){
-				res.send("no user")
-			}else{				
-				req.session.user = doc[0];
-				res.redirect("/")
-			}			
-		}else{
-			res.send(error)
-		}		
-	})
-});
-app.get("/logout",function(req,res){
-	req.session.user = null;
-	res.redirect("/login");
-});
+app.post("/login",router.signin);
 
 //json api
-
-app.get("/user/profile",function(req,res){
-	var id = req.session.user._id;
-	
-	if(id){
-		user.getProfile(id,function(doc){
-			res.send(doc)
-		});
-	}	
-});
-
-app.get("/posts",function(req,res){
-	posts.find(function(err,doc){
-		if(!err){
-			res.send(doc)
-		}		
-	});
-});
-
-app.get("/post/:id",function(req,res){
-	
-});
-
-app.post("/posts",function(req,res){
-	var id = req.session.user._id,
-		text = req.body.text,
-		name = req.session.user.username;
-	
-	posts.insert({
-		"author":id,
-		"text":text,
-		"name":name
-	},function(err,doc){
-		res.send(doc)
-	});
-});
-
-app.delete("/posts/:id",function(req,res){
-	
-	posts.delete({
-		"_id":req.params.id
-	},function(err,doc){
-		res.send("delete success")
-	})
-});
+app.get("/user/profile",router.user_profile);
+app.get("/posts",router.posts);
+app.get("/post/:id",router.getPost);
+app.post("/posts",router.addPost);
+app.delete("/posts/:id",router.deletePost);

@@ -18,7 +18,9 @@ define(["collection/posts","view/post"],function(postLib,postView){
 			var w = this;
 
 			w.listenTo(w.collection,"change",w.renderPost);			
-			w.collection.fetch({"success":w.render});
+			w.collection.fetch({"success":function(items){
+				w.render(items);
+			}});
 		},
 		addPost:function(e){
 			var w = this;
@@ -35,10 +37,11 @@ define(["collection/posts","view/post"],function(postLib,postView){
 		},
 		render:function(items){
 			var w = this;
-
-			items.models.forEach(function( item ) {
-				me.renderPost(item);
-	        });
+			
+	        for (var i = items.models.length - 1; i >= 0; i--) {
+	        	var item = items.models[i];
+	        	this.renderPost(item);
+	        };
 		},
 		renderPost:function(item){
 			var w = this;
@@ -50,9 +53,5 @@ define(["collection/posts","view/post"],function(postLib,postView){
 		}
 	});
 
-	var me = new meView();
-
-	return {
-		o:me
-	}
+	return meView;
 });

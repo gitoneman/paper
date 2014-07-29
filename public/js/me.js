@@ -1,14 +1,18 @@
 define(["collection/posts","view/post"],function(postLib,postView){
 
 	var meView = Backbone.View.extend({
-		el:$(".J_container_me"),
-		template: _.template( $( '#post' ).html() ),
+		tagName:"div",
+		className:"",
+		template: _.template( $( '#meView' ).html() ),
 		events:{
 			"submit .J_post_add":"addPost"
 		},
-		initialize:function(){
+		initialize:function(data){
 			var w = this;
 
+			w.wrap = data.wrap;
+			w.wrap.html( this.$el.html(this.template()) );
+			
 			w.postsWrap = w.$el.find(".J_me_posts");
 			w.collection = new postLib();
 
@@ -32,7 +36,8 @@ define(["collection/posts","view/post"],function(postLib,postView){
 				w.collection.create({
 					text:n.value,
 				});
-			})			
+			})
+
 			return false;
 		},
 		render:function(items){

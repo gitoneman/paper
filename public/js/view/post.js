@@ -14,7 +14,7 @@ define(function(){
 		},
 		deletePost:function(){
 			var w = this;
-console.log(w.model)
+
 			w.model.destroy();
 			w.remove();
 		}

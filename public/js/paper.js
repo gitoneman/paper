@@ -14,10 +14,12 @@ require(['underscore','backbone','model/user','me'],function(_,Backbone,userMode
 			"playground":"playControl"
 		},
 		meControl:function(){
-			this.meView = new meView()	
+			this.meView = new meView({
+				wrap:$("#view")
+			})
 		},
 		playControl:function(){
-			// this.meView.remove();
+			this.meView.remove();
 		}
 	});
 
@@ -28,10 +30,6 @@ require(['underscore','backbone','model/user','me'],function(_,Backbone,userMode
 		el:$("body"),
 		initialize: function() {
 			var w = this;
-
-			// this.$el.find("#me").click();
-			// this.meView = ;
-			// this.playView = ;
 
 			w.userModel = new userModel();
 			w.userModel.fetch();

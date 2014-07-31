@@ -9,7 +9,7 @@
 </head>
 <body>
 	<nav class="navbar navbar-default" role="navigation">
-		<div class="container-fluid">
+		<div class="container">
 		    <!-- Brand and toggle get grouped for better mobile display -->
 		    <div class="navbar-header">
 		      	<a class="navbar-brand" href="#">Paper</a>
@@ -23,7 +23,8 @@
 			        <li class="dropdown">
 			          	<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span>&nbsp;<span class="J_user_profile"></span><span class="caret"></span></a>
 			          	<ul class="dropdown-menu" role="menu">
-			            	<li><a href="/logout">logout</a></li>
+			            	<li><a href="/logout">Logout</a></li>
+			            	<li><a href="#user/edit">Modify account</a></li>
 			          	</ul>
 			        </li>
 		      	</ul>
@@ -33,19 +34,21 @@
 	<div id="view">
 
 	</div>
-
+	<!-- playground -->
 	<script id="playground" type="text/template">
 		<div class="container">
 			<div class="J_play_topics">
 			</div>
 			<div class="m-panel">
-				<span class="glyphicon glyphicon-plus-sign f-cp J_topic_show"></span>
+				<span class="glyphicon glyphicon-plus-sign f-cp J_topic_show f-mt10"></span>
 				<form class="J_topic_add f-hd">
 				<input class="form-control" rows="3" name="text" placeholder="enter you paper"></input>
 		  		<button type="submit" class="btn btn-primary btn-block f-mt10">save</button></form>
 			</div>
 		</div>
 	</script>
+	<!-- playground end -->
+	<!-- me view -->
 	<script id="meView" type="text/template">
 		<div class="container J_container_me">
 			<div class="row">
@@ -60,10 +63,32 @@
 					  		</form>
 					  	</div>
 				  	</div>
+				  	<h4>my friends</h4>
+				  	<hr>
+				  	<div class="list-group">
+					  	<a href="#" class="list-group-item">
+					  		<span class="glyphicon glyphicon-user"></span>&nbsp;
+					  	 	<span class="badge">14</span>
+					  		default
+					  	</a>					  	
+					</div>
 				</div>
 			</div>
 		</div>
 	</script>
+	<!-- me view end -->
+
+	<!-- friend view -->
+	<script id="friends" type="text/template">
+		<a href="#" class="list-group-item">
+	  		<span class="glyphicon glyphicon-user"></span>&nbsp;
+	  	 	<span class="badge">14</span>
+	  		<%= friend %> 
+	  	</a>
+	</script>
+	<!-- friend view end -->
+
+	<!-- post view -->
 	<script id="post" type="text/template">	    
 	    <div class="panel panel-default">
 		  	<div class="panel-body">
@@ -78,11 +103,46 @@
 		  	</div>
 	  	</div>
 	</script>
+	<!-- post view end -->
+
+	<!-- topic view -->
 	<script id="topic" type="text/template">	    
-	  	<div class="m-panel">
+	  	<a href="#topic/<%= id %>" class="f-db">
 			<%= text %>
-		</div>	  	
+		</a>
+		--by：<a href="javascript://"><%= author %></a>  	
 	</script>
+	<!-- topic view end -->
+
+	<!-- edit account view -->
+		<div class="J_user_edit" style="position:absolute;top: 60px;background:#fff;height: 420px;display:none;width:100%;">
+			<div class="container " >
+				<ul class="nav nav-tabs nav-justified" role="tablist">
+				 	<li class="active"><a href="#accout" role="tab" data-toggle="tab">accout</a></li>
+				  	<li ><a href="#example2" role="tab" data-toggle="tab">example2</a></li>
+				  	<li ><a href="#example3" role="tab" data-toggle="tab">example3</a></li>
+				</ul>
+				<div class="tab-content">
+				  	<div class="tab-pane active" id="accout">
+				  		<div class="row f-mt40">
+					    	<form role="form" action="/login" method="post">
+								<div class="col-md-6 col-md-offset-3">
+								  	<div class="form-group">
+								    	<input type="password" class="form-control" id="password" name="password" placeholder="Enter password">	
+								  	</div>		  	
+								</div>
+								<div class="col-md-3">
+									<button type="submit" class="btn btn-primary">Submit</button>
+								</div>
+							</form>	  
+						</div>
+				  	</div>
+				  	<div class="tab-pane" id="example2">example2</div>
+				  	<div class="tab-pane" id="example3">example3</div>
+				</div>
+			</div>
+		</div>
+	<!-- edit account view end -->
 
 	<script type="text/javascript" src="../js/lib/jquery.min.js"></script>
 	<script type="text/javascript" src="../js/lib/bootstrap.min.js"></script>

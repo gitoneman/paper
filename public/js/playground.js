@@ -38,7 +38,6 @@ define(["collection/topic","view/topic"],function(topicLib,topicView){
 					text:n.value,
 				});
 			})
-
 			return false;
 		},
 		render:function(items){

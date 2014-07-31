@@ -11,19 +11,30 @@ require(['underscore','backbone','model/user','me','playground'],function(_,Back
 	var appRoute = Backbone.Router.extend({
 		routes:{
 			"me":"meControl",
-			"playground":"playControl"
+			"playground":"playControl",
+			"topic/:id":"getTopic",
+			"user/edit":"editUser"
+
 		},
 		meControl:function(){
 			this.playView && this.playView.remove();
 			this.meView = new meView({
 				wrap:$("#view")
 			})
+			$(".J_user_edit").hide();
 		},
 		playControl:function(){
 			this.meView && this.meView.remove();
 			this.playView = new playView({
 				wrap:$("#view")
 			})
+			$(".J_user_edit").hide();
+		},
+		getTopic:function(){
+			alert("get topic")
+		},
+		editUser:function(){
+			$(".J_user_edit").show();
 		}
 	});
 

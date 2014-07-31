@@ -50,3 +50,4 @@ app.delete("/posts/:id",router.deletePost);
 
 app.get("/topics",router.topics);
 app.post("/topics",router.addTopic);
+app.get("/topic/:id",router.getTopic)

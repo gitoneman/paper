@@ -66,7 +66,11 @@ module.exports = {
 		}	
 	},
 	posts:function(req,res){
-		posts.find(function(err,doc){
+		var id = req.session.user._id;
+
+		posts.find({
+			author:id
+		},function(err,doc){
 			if(!err){
 				res.send(doc)
 			}		
@@ -113,6 +117,17 @@ module.exports = {
 			if(!err){
 				res.send(doc)
 			}			
+		});
+	},
+	getTopic:function(req,res){
+		var id = req.params.id;
+
+		topic.find({
+			_id:id
+		},function(err,doc){
+			if(!err){
+				res.send(doc)
+			}		
 		});
 	}
 }

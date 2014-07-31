@@ -1,6 +1,7 @@
 define(function(){
 	var topicView = Backbone.View.extend({
 		tagName:"div",
+		className:"m-panel",
 		template:_.template( $( '#topic' ).html() ),
 		events: {
 	        
